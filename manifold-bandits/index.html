@@ -1,11 +1,789 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>A Page</title>
-  </head>
-  <body>
-    <h1>A Page</h1>
-    <p>Coming soon.</p>
-  </body>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="Manifold Bandits: Bayesian Curriculum Learning over the Latent Geometry of Large Language Models." name="description"/>
+<meta content="Manifold Bandits, Bayesian Curriculum Learning, Latent Task Trees, RLVR, Large Language Models" name="keywords"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Manifold Bandits</title>
+<!--
+    TODO: Add your own analytics here if you want them.
+    Removed the Nerfies Google Analytics snippet from the original template.
+  -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Castoro&amp;display=swap" rel="stylesheet"/>
+<link href="./static/css/bulma.min.css" rel="stylesheet"/>
+<link href="./static/css/bulma-carousel.min.css" rel="stylesheet"/>
+<link href="./static/css/bulma-slider.min.css" rel="stylesheet"/>
+<link href="./static/css/fontawesome.all.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet"/>
+<link href="./static/css/index.css" rel="stylesheet"/>
+<link href="./static/css/project-overrides.css" rel="stylesheet"/>
+<link href="./static/images/favicon.png" rel="icon"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer="" src="./static/js/fontawesome.all.min.js"></script>
+<script src="./static/js/bulma-carousel.min.js"></script>
+<script src="./static/js/bulma-slider.min.js"></script>
+<script src="./static/js/index.js"></script>
+<!-- Small page-specific additions. Move these into static/css/index.css later if preferred. -->
+<style>
+    .figure-card {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .figure-card img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #e5e5e5;
+      background: #fff;
+    }
+
+    .takeaway-box {
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      border-left: 4px solid #363636;
+      background: #f7f7f7;
+      border-radius: 8px;
+    }
+
+    .feature-card {
+      height: 100%;
+      padding: 1.25rem;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .tree-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tree-card {
+      text-align: center;
+    }
+
+    .tree-card img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      cursor: zoom-in;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      background: #fff;
+    }
+
+    .tree-card img:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .tree-caption {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .tree-lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tree-lightbox.is-active {
+      display: flex;
+    }
+
+    .tree-lightbox img {
+      max-width: 95vw;
+      max-height: 90vh;
+      object-fit: contain;
+      background: white;
+      border-radius: 8px;
+    }
+
+    .tree-lightbox-close {
+      position: fixed;
+      top: 1rem;
+      right: 1.5rem;
+      border: none;
+      background: transparent;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    @media screen and (max-width: 768px) {
+      .tree-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .tree-lightbox {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<nav class="project-navbar">
+<div class="project-navbar-inner">
+<a aria-label="Darrien McKenzie homepage" class="project-navbar-brand logo-only" href="/">
+<img alt="Darrien McKenzie logo" src="./static/images/favicon.png"/>
+</a>
+<div class="project-navbar-links">
+<a href="#abstract">Abstract</a>
+<a href="#latent-task-trees">Trees</a>
+<a href="#bmc">BMC</a>
+<a href="#results">Results</a>
+<a href="#takeaways">Takeaways</a>
+<a href="#BibTeX">BibTeX</a>
+</div>
+</div>
+</nav>
+<section class="hero">
+<div class="hero-body">
+<div class="container is-max-desktop">
+<div class="columns is-centered">
+<div class="column has-text-centered">
+<h1 class="title is-1 publication-title">
+<span class="title-main">Manifold Bandits:</span><br/>
+<span class="title-subtitle">Bayesian Curriculum Learning over the Latent Geometry of Large Language Models</span>
+</h1>
+<div class="is-size-5 publication-authors">
+<span class="author-block">
+<a href="https://darrienmckenzie.com" target="_blank">Darrien McKenzie</a><sup>1</sup>,
+            </span>
+<span class="author-block">
+<a href="https://www.nicklashansen.com/" target="_blank">Nicklas Hansen</a><sup>1</sup><sup>,</sup><sup>†</sup>,
+            </span>
+<span class="author-block">
+<a href="https://xiaolonw.github.io/" target="_blank">Xiaolong Wang</a><sup>1</sup><sup>,</sup><sup>†</sup>
+</span>
+</div>
+<div class="is-size-5 publication-authors">
+<span class="author-block"><sup>1</sup>UC San Diego</span>
+<span class="author-block"><sup>†</sup>Equal Advising</span>
+</div>
+<div class="column has-text-centered">
+<div class="publication-links">
+<span class="link-block">
+<a class="external-link button is-normal is-rounded is-dark" href="https://arxiv.org/abs/2606.19750" target="_blank">
+<span class="icon"><i class="fas fa-file-pdf"></i></span>
+<span>Paper</span>
+</a>
+</span>
+<span class="link-block">
+<a class="external-link button is-normal is-rounded is-dark" href="https://github.com/DarrienMcKenzie/manifold-bandits" target="_blank">
+<span class="icon"><i class="fab fa-github"></i></span>
+<span>Code</span>
+</a>
+</span>
+<span class="link-block">
+<a class="external-link button is-normal is-rounded is-dark" href="https://github.com/DarrienMcKenzie/manifold-bandits/releases/tag/v0.1" target="_blank">
+<span class="icon"><i class="fas fa-sitemap"></i></span>
+<span>Tree Breakdowns</span>
+</a>
+</span>
+<span class="link-block">
+<a class="external-link button is-normal is-rounded is-dark is-disabled-button" href="#" aria-disabled="true" tabindex="-1">
+<span class="icon"><i class="fas fa-chart-line"></i></span> <span>Training Logs <span class="coming-soon-label">(coming soon)</span></span> </a>
+</span>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="hero teaser">
+<div class="container is-max-desktop">
+<div class="hero-body">
+<figure class="figure-card figure-concept">
+<img alt="Manifold Bandits teaser figure." src="./static/images/teaser.svg"/>
+</figure>
+<h2 class="subtitle has-text-centered">
+<strong>Bayesian Manifold Curriculum (BMC)</strong> builds RL training batches by
+  sampling productive and diverse problem types from the policy model's latent task
+  manifold. This improves the trade-off between training efficiency and broad data
+  coverage.
+</h2>
+</div>
+</div>
+</section>
+<section class="section" id="abstract">
+<div class="container is-max-desktop">
+<div class="columns is-centered has-text-centered">
+<div class="column is-four-fifths">
+<h2 class="title is-3">Abstract</h2>
+<div class="content has-text-justified">
+<p>
+	Reinforcement learning (RL) is a central approach for improving reasoning capabilities in 
+	large language models (LLMs), where training efficiency depends critically on how problems
+	are sampled during optimization. Existing adaptive curriculum learning methods typically 
+	prioritize prompts of intermediate difficulty, treating problem selection as a standard 
+	bandit problem with independent arms and overlooking the structured, heterogeneous nature
+	of the task space. In this work, we frame problem sampling as a manifold-structured bandit
+	problem with endogenous non-stationarity: problems are related through the model's latent 
+	representation space, and sampling decisions can steer how learning signals evolve across 
+	that space. To operationalize this perspective, we introduce <strong>Bayesian Manifold 
+	Curriculum (BMC)</strong>, a structure-aware framework that organizes problems into a hierarchical 
+	task tree and applies Bayesian learning to guide sampling. Empirically, we find that 
+	different sampling strategies induce non-trivial tradeoffs between <i>productivity</i> (learning signal)
+	, <i>diversity</i> (coverage of the task manifold), and <i>utility</i> (evaluation relevance). 
+	These results show that prioritizing difficulty alone is insufficient to ensure strong downstream performance
+	and highlight the importance of incorporating structure and type-awareness in problem sampling.
+</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="latent-task-trees">
+<div class="container is-max-desktop">
+<div class="columns is-centered">
+<div class="column is-full-width">
+<h2 class="title is-3">Latent Task Trees</h2>
+<div class="content has-text-justified">
+<p>
+            A Latent Task Tree is a hierarchical partition of training prompts induced
+            from the policy model's own hidden representations. It gives the curriculum
+            a structured action space over related regions of the task manifold, without
+            relying on human-written labels or external taxonomies.
+          </p>
+</div>
+<figure class="figure-card figure-concept">
+<img alt="Latent Task Tree construction figure." src="./static/images/ltt.svg"/>
+</figure>
+<div class="content has-text-justified card-leadin">
+<p>
+			Because the tree is built from the model's own representations, it provides
+			a practical interface for curriculum learning:
+		  </p>
+</div>
+<div class="columns is-multiline">
+<div class="column is-half">
+<div class="feature-card content">
+<h4 class="title is-5">General</h4>
+<p>
+				  Every model has a latent space over its inputs. Latent Task Trees can therefore be
+				  constructed across languages, domains, and modalities.
+              </p>
+</div>
+</div>
+<div class="column is-half">
+<div class="feature-card content">
+<h4 class="title is-5">Adaptive</h4>
+<p>
+                Tree construction adapts to the policy's latent geometry: different models and
+                datasets induce different task organizations.
+              </p>
+</div>
+</div>
+<div class="column is-half">
+<div class="feature-card content">
+<h4 class="title is-5">Convenient</h4>
+<p>
+                Requires only a model and a prompt dataset. No task labels, difficulty
+                labels, external models, or hand-built taxonomies are needed.
+              </p>
+</div>
+</div>
+<div class="column is-half">
+<div class="feature-card content">
+<h4 class="title is-5">Efficient</h4>
+<p>
+                Built from forward-only representation extraction and unsupervised
+                clustering, making tree construction relatively cheap compared to the
+                autoregressive rollouts used during RL training.
+              </p>
+</div>
+</div>
+</div>
+<h3 class="title is-4" style="margin-top: 2rem;">
+          Latent Trees Across Domains
+        </h3>
+<div class="content has-text-justified">
+<p>
+			The resulting tree can vary greatly across datasets, reflecting how the policy
+			organizes different domains in representation space. 
+			Click any thumbnail to inspect a larger version.
+          </p>
+</div>
+<div class="tree-gallery eight-trees"><div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for DAPO-Math-17K" class="expandable-tree" data-full="./static/images/treebreakdown_dapomath.svg" src="./static/images/treebreakdown_dapomath.svg"/></div><p class="tree-caption"><span class="tree-domain">Math</span><span class="tree-dataset">DAPO-Math-17K</span></p><a class="tree-full-link" href="./static/images/treebreakdown_dapomath.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for DeepCoder-Preview" class="expandable-tree" data-full="./static/images/treebreakdown_deepcoder.svg" src="./static/images/treebreakdown_deepcoder.svg"/></div><p class="tree-caption"><span class="tree-domain">Code</span><span class="tree-dataset">DeepCoder-Preview</span></p><a class="tree-full-link" href="./static/images/treebreakdown_deepcoder.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for AlphaMed-19K" class="expandable-tree" data-full="./static/images/treebreakdown_alphamed.svg" src="./static/images/treebreakdown_alphamed.svg"/></div><p class="tree-caption"><span class="tree-domain">Medicine</span><span class="tree-dataset">AlphaMed-19K</span></p><a class="tree-full-link" href="./static/images/treebreakdown_alphamed.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for BarExamQA" class="expandable-tree" data-full="./static/images/treebreakdown_barexamqa.svg" src="./static/images/treebreakdown_barexamqa.svg"/></div><p class="tree-caption"><span class="tree-domain">Law</span><span class="tree-dataset">BarExamQA</span></p><a class="tree-full-link" href="./static/images/treebreakdown_barexamqa.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for Agentar-DeepFinance-100K" class="expandable-tree" data-full="./static/images/treebreakdown_deepfinance.svg" src="./static/images/treebreakdown_deepfinance.svg"/></div><p class="tree-caption"><span class="tree-domain">Finance</span><span class="tree-dataset">Agentar-DeepFinance-100K</span></p><a class="tree-full-link" href="./static/images/treebreakdown_finance.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for GURU-92K" class="expandable-tree" data-full="./static/images/treebreakdown_guru.svg" src="./static/images/treebreakdown_guru.svg"/></div><p class="tree-caption"><span class="tree-domain">Multi-domain Reasoning</span><span class="tree-dataset">GURU-92K</span></p><a class="tree-full-link" href="./static/images/treebreakdown_guru.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for IF-RLVR" class="expandable-tree" data-full="./static/images/treebreakdown_if.svg" src="./static/images/treebreakdown_if.svg"/></div><p class="tree-caption"><span class="tree-domain">Instruction Following</span><span class="tree-dataset">IF-RLVR</span></p><a class="tree-full-link" href="./static/images/treebreakdown_if.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for Geometry3K" class="expandable-tree" data-full="./static/images/treebreakdown_geometry.svg" src="./static/images/treebreakdown_geometry.svg"/></div><p class="tree-caption"><span class="tree-domain">Visual Math</span><span class="tree-dataset">Geometry3K</span></p><a class="tree-full-link" href="./static/images/treebreakdown_geometry.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section hero is-light" id="bmc">
+<div class="container is-max-desktop">
+<div class="columns is-centered">
+<div class="column is-full-width">
+<h2 class="title is-3">Bayesian Manifold Curriculum</h2>
+<div class="content has-text-justified">
+<p>
+            BMC treats curriculum learning as structured bandit optimization over the Latent Task Tree.
+            It samples top-down, updates prompt-level beliefs from observed rollout learning signal,
+            and aggregates information bottom-up so related regions share statistical strength.
+          </p>
+</div>
+<figure class="figure-card figure-concept">
+<img alt="Bayesian Manifold Curriculum method figure." src="./static/images/bmc.svg"/>
+<figcaption class="has-text-centered">
+    Only one agent is shown for visualization; in practice, multiple agents descend the
+    tree independently to form a batch.
+          </figcaption>
+</figure>
+<div class="content has-text-justified card-leadin">
+<p>
+    BMC works over the Latent Task Tree at multiple levels of abstraction. Its key
+    behavior is to balance <strong>focus</strong> and <strong>dispersion</strong>:
+    concentrate effort where learning signal appears strongest, but spread effort across
+    distinct types when several regions look comparably promising.
+  </p>
+</div>
+<div class="columns is-multiline">
+<div class="column is-half">
+<div class="feature-card content">
+<h4 class="title is-5">Focus</h4>
+<p>
+        If one part of the tree looks especially promising, BMC concentrates more
+        samples there, allocating effort where the policy seems most able to improve.
+      </p>
+</div>
+</div>
+<div class="column is-half">
+<div class="feature-card content">
+<h4 class="title is-5">Dispersion</h4>
+<p>
+        If several parts of the tree look similarly promising, BMC spreads samples
+        across them, preserving diversity across distinct problem types.
+      </p>
+</div>
+</div>
+
+<div class="takeaway-box content">
+<p>
+<strong>Key idea:</strong> BMC treats curriculum learning as multi-scale allocation
+    over the latent task space, focusing training effort where learning signal is high
+    while preserving coverage across distinct problem types.
+  </p>
+</div>
+
+<div class="content has-text-justified card-leadin">
+  <p>
+    This makes BMC a generally applicable curriculum sampler for RL training:
+    it can be paired with different reward signals, optimization algorithms,
+    and task domains.
+  </p>
+</div>
+
+
+<div class="columns is-multiline">
+  <div class="column is-one-third">
+    <div class="feature-card content">
+      <h4 class="title is-5">Reward-compatible</h4>
+      <p>
+	  BMC is not limited to binary-verifier settings typical of RLVR. It can handle
+	  continuous rewards, enabling applications to RLHF and rubric-based RL.
+      </p>
+    </div>
+  </div>
+
+  <div class="column is-one-third">
+    <div class="feature-card content">
+      <h4 class="title is-5">Algorithm-compatible</h4>
+      <p>
+        BMC is compatible with group-relative RL algorithms that generate multiple
+        rollouts per prompt, including GRPO, DAPO, and GSPO.
+      </p>
+    </div>
+  </div>
+
+  <div class="column is-one-third">
+    <div class="feature-card content">
+      <h4 class="title is-5">Domain-general</h4>
+      <p>
+		  BMC inherits the generality of Latent Task Trees: the same curriculum sampler can
+		  operate across domains, languages, and modalities.
+      </p>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="results">
+<div class="container is-max-desktop">
+<div class="columns is-centered">
+<div class="column is-full-width">
+<h2 class="title is-3">Results: Three Axes of Curriculum Design</h2>
+<div class="content has-text-justified">
+<p>
+	We focus this website on the main <code>DAPO-Math-17K</code> experiments with <code>Qwen3-8B-Base</code>, 
+	which provide the clearest view of the curriculum tradeoffs studied in the paper. The full paper additionally
+	reports other model sizes, policy optimization algorithms, ablations, and appendix experiments in additional 
+	domains. Here, we organize the main evidence around three interacting axes of curriculum design:
+	<strong>productivity</strong>, <strong>diversity</strong>, and <strong>utility</strong>.
+  </p>
+</div>
+<h3 class="title is-4">Productivity</h3>
+<div class="content has-text-justified">
+<p> Productivity measures whether sampled prompts produce useful RLVR updates.
+	 The most productive problems often lie in a “Goldilocks zone” of difficulty: 
+	 not so easy that the model always succeeds, and not so hard that it always fails.
+	 These problems create variation across attempts, giving the policy a learning signal for improvement. 
+	</p>
+<p>
+		We track this in two ways. <strong>Effective Ratio</strong> measures how many
+		sampled prompts produce nonzero learning signal, measured by rollout reward variance.
+		<strong>Learning Speed</strong> measures how quickly the policy improves on the
+		training set. Dynamic Sampling finds productive prompts by repeatedly searching for
+		batches with reward variation, but this extra search increases wall-clock cost.
+		BMC instead uses the Latent Task Tree to predict and target productive problems directly.
+	</p>
+</div>
+<figure class="figure-card figure-result">
+<img alt="Productivity results on Qwen-8B-Base with GSPO." src="./static/images/productivity.svg"/>
+<figcaption class="has-text-centered">
+    Effective Ratio tracks how often sampled prompts fall into the useful learning regime;
+    Learning Speed tracks training-set pass@1 improvement. Representative
+    <code>Qwen3-8B-Base</code> result shown. Full protocol details are provided in the paper.
+  </figcaption>
+</figure>
+<div class="takeaway-box content">
+<p>
+<strong>Takeaway:</strong> On <code>Qwen3-8B-Base</code>, BMC matches
+    Dynamic Sampling's learning speed without its wall-clock overhead. More broadly,
+    BMC provides a structured middle ground between cheap uniform sampling and
+    expensive resampling-based curricula.
+  </p>
+</div>
+<p class="axis-bridge">
+  Productivity is only the first axis: the next sections ask whether productive sampling
+  also preserves coverage and aligns with downstream evaluation goals.
+</p>
+<hr/>
+<h3 class="title is-4">Diversity</h3>
+<div class="content has-text-justified">
+<p>
+    Diversity measures how well a sampling method preserves coverage of problem types
+    on the latent task manifold. Since training datasets are often imbalanced, a flat,
+    difficulty-driven sampler can focus narrowly on a small set of productive problem
+    types. A diversity-only sampler (the “Tree Only” ablation of BMC) instead emphasizes
+    broad type exposure. BMC is designed to jointly balance these objectives.
+  </p>
+</div>
+<figure class="figure-card figure-result">
+<img alt="Diversity diagnostics for BMC on Qwen-8B." src="./static/images/diversity.svg"/>
+<figcaption class="has-text-centered">
+<strong>Rarity-weighted exposure</strong> measures sampling of underrepresented problem types.
+    <strong>Structure gain</strong> measures whether the Latent Task Tree explains learning signal,
+    our proxy for difficulty, better than random groupings, even for sampling methods that
+    do not use the tree.
+	</figcaption>
+</figure>
+<div class="takeaway-box content">
+<p class="takeaway-label">Takeaways</p>
+<div class="split-takeaway">
+<div>
+<h4>Coverage is preserved</h4>
+<p>
+        BMC jointly balances productivity and diversity, interpolating between flat
+        difficulty-driven Thompson Sampling and the diversity-only Tree Only ablation
+        while preserving broader type coverage.
+      </p>
+</div>
+<div>
+<h4>Similar type, similar difficulty</h4>
+<p>
+		Positive structure gain shows that learning signal, our proxy for difficulty,
+		is more aligned with Latent Task Tree neighborhoods than with random groupings.
+		In other words, related problem types tend to share more learning structure than
+		unrelated types.
+	  </p>
+</div>
+</div>
+</div>
+<hr/>
+<h3 class="title is-4">Utility</h3>
+<div class="content has-text-justified">
+<p>
+    Utility asks whether a sampling method improves the capabilities or evaluations we
+    actually care about. Productive prompts are not always evaluation-relevant prompts:
+    a sampler can find high learning signal while under-sampling regions that matter for
+    downstream tests. Likewise, broad diversity is not helpful if the additional
+    coverage falls into <strong>evaluation deadzones</strong>: regions of the latent task
+    manifold that are productive, but weakly related to the target evaluations.
+  </p>
+</div>
+<figure class="figure-card figure-result">
+<img alt="Utility evaluation results figure." src="./static/images/utility.svg"/>
+</figure>
+<p class="figure-note">
+  Utility is evaluation-dependent: methods that improve one benchmark family can
+  underperform on another. Full method-by-method breakdowns are provided in the paper.
+</p>
+<div class="takeaway-box content">
+<p class="takeaway-label">Takeaways</p>
+<div class="split-takeaway">
+<div>
+<h4>Productivity is not sufficient</h4>
+<p>
+		Dynamic Sampling is highly productive during training, but productivity does not
+		guarantee downstream utility. It can find strong learning signal while focusing on
+		problem types that transfer poorly to some evaluations, such as Chinese math.
+      </p>
+</div>
+<div>
+<h4>Diversity is not sufficient</h4>
+<p>
+		BMC is productive and samples across broader problem types, but broader coverage only
+		helps when those types are relevant to the target evaluation. Some productive problem
+		types can fall into evaluation deadzones: regions of the task manifold that are
+		learnable during training, but weakly related to the target test distribution.
+      </p>
+</div>
+</div>
+</div>
+<h4 class="title is-5" style="margin-top: 2rem;">
+  Utility Awareness: Steering Generalization with BMC-T
+</h4>
+<div class="content has-text-justified">
+<p>
+    The evaluation deadzone interpretation raises a natural question: can we intentionally
+    target problem types that are not only productive and diverse, but also relevant to
+    a desired capability? To investigate this, we introduce a targeting extension of BMC,
+    denoted <strong>BMC-T</strong>.
+  </p>
+<p>
+    BMC-T builds a shared Latent Task Tree over both <em>training</em> prompts and
+    <em>target</em> examples, such as held-out evaluation problems or a collection of
+    tasks representing a desired capability. The target examples are never used for
+    training. Instead, they help identify which training problem types overlap with,
+    or lie near, the target capability on the tree.
+  </p>
+<p>
+    Intuitively, BMC-T treats proximity on the Latent Task Tree as a coarse form of
+    conceptual similarity: training on problem types near a target should be more likely
+    to transfer than training on unrelated types. We evaluate two variants on
+    <code>DAPO-Math-17K</code>: <strong>BMC-T (T = All)</strong>, which uses the full
+    evaluation mixture as the target distribution, and
+    <strong>BMC-T (T = AIME2024)</strong>, which uses only AIME2024 as the target
+    distribution.
+  </p>
+<p>
+    The key question is whether utility can be treated as an independent axis of
+    curriculum design. If BMC-T variants maintain similar productivity but produce
+    different downstream evaluation profiles, then utility is not reducible to
+    productivity alone.
+  </p>
+</div>
+<figure class="figure-card figure-result">
+<img alt="Productivity metrics for BMC and BMC-T variants." src="./static/images/utilaware_metrics.svg"/>
+<figcaption class="has-text-centered">
+    BMC and the two BMC-T variants maintain similar productivity during training,
+    with comparable learning speed and effective ratio.
+  </figcaption>
+</figure>
+<figure class="figure-card figure-result">
+<img alt="Evaluation results for BMC and BMC-T variants." src="./static/images/utilaware_evals.svg"/>
+<figcaption class="has-text-centered">
+    Despite similar productivity, the variants produce different downstream evaluation
+    profiles depending on the target distribution used to bias sampling. Targeting
+    AIME2024 improves AIME-style English competition math, while targeting the full
+    evaluation mixture shifts performance toward a broader capability profile,
+    including stronger Chinese math performance.
+  </figcaption>
+</figure>
+<div class="takeaway-box content">
+<p class="takeaway-label">Takeaways</p>
+<div class="split-takeaway">
+<div>
+<h4>Utility is not productivity</h4>
+<p>
+		BMC, BMC-T (T = All), and BMC-T (T = AIME2024) exhibit similar learning speed and effective ratio, 
+		yet produce different downstream evaluation profiles. Productivity explains whether training examples
+		produce useful updates, but not which capabilities those updates improve.
+      </p>
+</div>
+<div>
+<h4>Generalization is steered</h4>
+<p>
+		Changing the target distribution changes which evaluations improve, suggesting that capability development
+		can be shaped by where training effort falls on the latent task manifold. BMC-T uses the shared Latent Task Tree
+		as a coarse map for steering training toward desired capabilities.
+      </p>
+</div>
+</div>
+</div>
+</div></div></div></section>
+<section class="section hero is-light" id="takeaways">
+<div class="container is-max-desktop">
+<div class="columns is-centered">
+<div class="column is-full-width">
+<h2 class="title is-3">Main Takeaways</h2>
+<div class="content has-text-justified">
+<p>
+BMC treats curriculum learning as multi-scale allocation over a heterogeneous task space.
+The central lesson is simple: there are more variables to consider than just difficulty. Effective curricula must also account for problem type,
+coverage, and downstream utility.
+</p>
+</div>
+<div class="columns is-multiline">
+<div class="column is-half">
+<div class="feature-card content">
+<h4 class="title is-5">Human-Policy Task Mismatch</h4>
+<p>
+Human-defined labels and categories can hide the structure the policy actually sees. 
+What looks like one dataset or domain can contain many distinct task distributions and problem types,
+ each with different difficulty, learning dynamics, and downstream relevance.
+</p>
+</div>
+</div>
+<div class="column is-half">
+<div class="feature-card content">
+<h4 class="title is-5">Type matters</h4>
+<p>
+                Two curricula can produce similar learning signal while exposing the model
+                to different problem types, leading to different downstream capability
+                profiles.
+              </p>
+</div>
+</div>
+<div class="column is-half">
+<div class="feature-card content">
+<h4 class="title is-5">Difficulty is not enough</h4>
+<p>
+                Productive problems help the model learn faster, but high productivity alone
+                does not guarantee better evaluations.
+              </p>
+</div>
+</div>
+<div class="column is-half">
+<div class="feature-card content">
+<h4 class="title is-5">Utility is its own axis</h4>
+<p>
+                Even a productive curriculum that spans many problem types can spend effort
+                on types that contribute little to the capabilities we care about. Utility
+                captures whether sampled types are not only learnable and diverse, but also
+                relevant to the desired capability.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="BibTeX">
+<div class="container is-max-desktop content">
+<h2 class="title">BibTeX</h2>
+<pre><code>@misc{mckenzie2026manifoldbanditsbayesiancurriculum,
+      title={Manifold Bandits: Bayesian Curriculum Learning over the Latent Geometry of Large Language Models}, 
+      author={Darrien McKenzie and Nicklas Hansen and Xiaolong Wang},
+      year={2026},
+      eprint={2606.19750},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2606.19750}, 
+}</code></pre>
+</div>
+</section>
+<div class="tree-lightbox" id="tree-lightbox">
+<button aria-label="Close expanded tree" class="tree-lightbox-close" id="tree-lightbox-close">×</button>
+<img alt="Expanded Latent Task Tree" id="tree-lightbox-img" src="">
+</img></div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://arxiv.org/pdf/2606.19750" target="_blank">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/DarrienMcKenzie/manifold-bandits" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered footer-note">
+          <p>
+            The paper is released under a
+            <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
+              CC BY 4.0 license
+            </a>.
+            The code is released under the
+            <a href="#" target="_blank" rel="noopener noreferrer">MIT License</a>.
+          </p>
+
+          <p>
+            This website is adapted from the
+            <a href="https://nerfies.github.io/" target="_blank" rel="noopener noreferrer">
+              Nerfies
+            </a>
+            project page template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const lightbox = document.getElementById("tree-lightbox");
+    const lightboxImg = document.getElementById("tree-lightbox-img");
+    const closeButton = document.getElementById("tree-lightbox-close");
+
+    document.querySelectorAll(".expandable-tree").forEach((img) => {
+      img.addEventListener("click", () => {
+        const fullSrc = img.getAttribute("data-full") || img.getAttribute("src");
+        lightboxImg.setAttribute("src", fullSrc);
+        lightboxImg.setAttribute("alt", img.getAttribute("alt") || "Expanded image");
+        lightbox.classList.add("is-active");
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-active");
+      lightboxImg.setAttribute("src", "");
+    }
+
+    closeButton.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+    });
+  });
+</script>
+</body>
 </html>
