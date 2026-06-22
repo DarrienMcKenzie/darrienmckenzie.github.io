@@ -253,6 +253,26 @@
 </div>
 </div>
 </section>
+
+<section class="section main-idea-section" id="main-idea">
+<div class="container is-max-desktop">
+<div class="columns is-centered">
+<div class="column is-full-width">
+<div class="main-idea-box content">
+<p class="main-idea-label">Main idea</p>
+<p>
+  Instead of treating curriculum learning as a matter of just finding problems of the
+  right difficulty, we treat it as allocating training effort across diverse and
+  interacting problem types. The relationships between problems are approximated by
+  the latent geometry of the policy, or: how the LLM being trained represents problems
+  internally. BMC uses this geometry to orchestrate training.
+</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
 <section class="section" id="latent-task-trees">
 <div class="container is-max-desktop">
 <div class="columns is-centered">
@@ -324,14 +344,14 @@
 			Click any thumbnail to inspect a larger version.
           </p>
 </div>
-<div class="tree-gallery eight-trees"><div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for DAPO-Math-17K" class="expandable-tree" data-full="./static/images/treebreakdown_dapomath.svg" src="./static/images/treebreakdown_dapomath.svg"/></div><p class="tree-caption"><span class="tree-domain">Math</span><span class="tree-dataset">DAPO-Math-17K</span></p><a class="tree-full-link" href="./static/images/treebreakdown_dapomath.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
-<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for DeepCoder-Preview" class="expandable-tree" data-full="./static/images/treebreakdown_deepcoder.svg" src="./static/images/treebreakdown_deepcoder.svg"/></div><p class="tree-caption"><span class="tree-domain">Code</span><span class="tree-dataset">DeepCoder-Preview</span></p><a class="tree-full-link" href="./static/images/treebreakdown_deepcoder.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
-<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for AlphaMed-19K" class="expandable-tree" data-full="./static/images/treebreakdown_alphamed.svg" src="./static/images/treebreakdown_alphamed.svg"/></div><p class="tree-caption"><span class="tree-domain">Medicine</span><span class="tree-dataset">AlphaMed-19K</span></p><a class="tree-full-link" href="./static/images/treebreakdown_alphamed.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
-<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for BarExamQA" class="expandable-tree" data-full="./static/images/treebreakdown_barexamqa.svg" src="./static/images/treebreakdown_barexamqa.svg"/></div><p class="tree-caption"><span class="tree-domain">Law</span><span class="tree-dataset">BarExamQA</span></p><a class="tree-full-link" href="./static/images/treebreakdown_barexamqa.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
-<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for Agentar-DeepFinance-100K" class="expandable-tree" data-full="./static/images/treebreakdown_deepfinance.svg" src="./static/images/treebreakdown_deepfinance.svg"/></div><p class="tree-caption"><span class="tree-domain">Finance</span><span class="tree-dataset">Agentar-DeepFinance-100K</span></p><a class="tree-full-link" href="./static/images/treebreakdown_finance.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
-<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for GURU-92K" class="expandable-tree" data-full="./static/images/treebreakdown_guru.svg" src="./static/images/treebreakdown_guru.svg"/></div><p class="tree-caption"><span class="tree-domain">Multi-domain Reasoning</span><span class="tree-dataset">GURU-92K</span></p><a class="tree-full-link" href="./static/images/treebreakdown_guru.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
-<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for IF-RLVR" class="expandable-tree" data-full="./static/images/treebreakdown_if.svg" src="./static/images/treebreakdown_if.svg"/></div><p class="tree-caption"><span class="tree-domain">Instruction Following</span><span class="tree-dataset">IF-RLVR</span></p><a class="tree-full-link" href="./static/images/treebreakdown_if.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
-<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for Geometry3K" class="expandable-tree" data-full="./static/images/treebreakdown_geometry.svg" src="./static/images/treebreakdown_geometry.svg"/></div><p class="tree-caption"><span class="tree-domain">Visual Math</span><span class="tree-dataset">Geometry3K</span></p><a class="tree-full-link" href="./static/images/treebreakdown_geometry.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-gallery eight-trees"><div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for DAPO-Math-17K" class="expandable-tree" data-full="./static/images/treebreakdown_dapomath.svg" src="./static/images/treebreakdown_dapomath.svg"/></div><p class="tree-caption"><span class="tree-domain">Math</span><a class="tree-dataset" href="https://huggingface.co/datasets/BytedTsinghua-SIA/DAPO-Math-17k" target="_blank" rel="noopener noreferrer">DAPO-Math-17K</a></p><a class="tree-full-link" href="./static/images/treebreakdown_dapomath.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for DeepCoder-Preview" class="expandable-tree" data-full="./static/images/treebreakdown_deepcoder.svg" src="./static/images/treebreakdown_deepcoder.svg"/></div><p class="tree-caption"><span class="tree-domain">Code</span><a class="tree-dataset" href="https://huggingface.co/datasets/agentica-org/DeepCoder-Preview-Dataset" target="_blank" rel="noopener noreferrer">DeepCoder-Preview</a></p><a class="tree-full-link" href="./static/images/treebreakdown_deepcoder.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for AlphaMed-19K" class="expandable-tree" data-full="./static/images/treebreakdown_alphamed.svg" src="./static/images/treebreakdown_alphamed.svg"/></div><p class="tree-caption"><span class="tree-domain">Medicine</span><a class="tree-dataset" href="https://huggingface.co/datasets/che111/AlphaMed19K" target="_blank" rel="noopener noreferrer">AlphaMed-19K</a></p><a class="tree-full-link" href="./static/images/treebreakdown_alphamed.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for BarExamQA" class="expandable-tree" data-full="./static/images/treebreakdown_barexamqa.svg" src="./static/images/treebreakdown_barexamqa.svg"/></div><p class="tree-caption"><span class="tree-domain">Law</span><a class="tree-dataset" href="https://huggingface.co/datasets/reglab/barexam_qa" target="_blank" rel="noopener noreferrer">BarExamQA</a></p><a class="tree-full-link" href="./static/images/treebreakdown_barexamqa.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for Agentar-DeepFinance-100K" class="expandable-tree" data-full="./static/images/treebreakdown_deepfinance.svg" src="./static/images/treebreakdown_deepfinance.svg"/></div><p class="tree-caption"><span class="tree-domain">Finance</span><a class="tree-dataset" href="https://huggingface.co/datasets/antgroup/Agentar-DeepFinance-100K" target="_blank" rel="noopener noreferrer">Agentar-DeepFinance-100K</a></p><a class="tree-full-link" href="./static/images/treebreakdown_finance.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for GURU-92K" class="expandable-tree" data-full="./static/images/treebreakdown_guru.svg" src="./static/images/treebreakdown_guru.svg"/></div><p class="tree-caption"><span class="tree-domain">Multi-domain Reasoning</span><a class="tree-dataset" href="https://huggingface.co/datasets/LLM360/guru-RL-92k" target="_blank" rel="noopener noreferrer">GURU-92K</a></p><a class="tree-full-link" href="./static/images/treebreakdown_guru.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for IF-RLVR" class="expandable-tree" data-full="./static/images/treebreakdown_if.svg" src="./static/images/treebreakdown_if.svg"/></div><p class="tree-caption"><span class="tree-domain">Instruction Following</span><a class="tree-dataset" href="https://huggingface.co/datasets/allenai/IF_multi_constraints_upto5" target="_blank" rel="noopener noreferrer">IF-RLVR</a></p><a class="tree-full-link" href="./static/images/treebreakdown_if.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
+<div class="tree-card"><div class="tree-thumb-frame"><img alt="Latent Task Tree for Geometry3K" class="expandable-tree" data-full="./static/images/treebreakdown_geometry.svg" src="./static/images/treebreakdown_geometry.svg"/></div><p class="tree-caption"><span class="tree-domain">Visual Geometry</span><a class="tree-dataset" href="https://huggingface.co/datasets/hiyouga/geometry3k" target="_blank" rel="noopener noreferrer">Geometry3K</a></p><a class="tree-full-link" href="./static/images/treebreakdown_geometry.svg" rel="noopener noreferrer" target="_blank">Open full resolution</a></div>
 </div>
 </div>
 </div>

@@ -699,3 +699,45 @@ pre {
 .bmc-compatibility-cards {
   margin-top: 0.25rem;
 }
+
+
+/* Main idea callout below the abstract. */
+.main-idea-section {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.main-idea-box {
+  padding: 1.15rem 1.35rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  background: #ffffff;
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.main-idea-label {
+  margin-bottom: 0.4rem !important;
+  font-weight: 700;
+  color: var(--text);
+}
+
+
+/* Dataset names in the tree gallery can link to their source datasets. */
+a.tree-dataset {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+a.tree-dataset:hover {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tree-gallery.eight-trees a.tree-dataset {
+  font-size: 0.86rem;
+}
