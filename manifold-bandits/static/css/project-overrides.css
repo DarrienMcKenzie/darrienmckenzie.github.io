@@ -27,7 +27,7 @@ body {
   line-height: 1.6;
 }
 
-/* Keep the project page visually tied to the homepage without importing the full homepage CSS. */
+/* Keep the project page visually tied to the homepage without importing the full homepage CSS */
 a {
   color: var(--link);
   text-decoration: none;
