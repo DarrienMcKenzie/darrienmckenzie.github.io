@@ -20,13 +20,917 @@
 <link href="./static/css/fontawesome.all.min.css" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet"/>
 <link href="./static/css/index.css" rel="stylesheet"/>
-<link href="./static/css/project-overrides.css" rel="stylesheet"/>
+<link href="./static/css/project-overrides.css?v=mb4" rel="stylesheet"/>
 <link href="./static/images/favicon.png" rel="icon"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script defer="" src="./static/js/fontawesome.all.min.js"></script>
 <script src="./static/js/bulma-carousel.min.js"></script>
 <script src="./static/js/bulma-slider.min.js"></script>
 <script src="./static/js/index.js"></script>
+<!-- Bundled project styles keep this page current even when external CSS is cached or unavailable. -->
+<style id="project-overrides-inline">
+/* Manifold Bandits project-page overrides
+   Place this after the Nerfies/Bulma CSS imports:
+   <link rel="stylesheet" href="./static/css/project-overrides.css">
+*/
+
+:root {
+  --bg: #faf9f6;
+  --topbar: var(--bg);
+  --contrast-bg: #f5f4f0;
+  --card: #ffffff;
+  --border: #e8e4dc;
+  --text: #222222;
+  --muted: #666666;
+  --accent: #DD8452;
+  --accent-soft: rgba(221, 132, 82, 0.14);
+  --link: #4f78c4;
+  --link-hover: #7AA5FF;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans', Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+/* Keep the project page visually tied to the homepage without importing the full homepage CSS */
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+.hero,
+.section,
+.footer {
+  background: var(--bg);
+}
+
+.hero.is-light,
+.section.hero.is-light {
+  background: var(--topbar) !important;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.container.is-max-desktop {
+  max-width: 1050px !important;
+}
+
+.title,
+.publication-title,
+.publication-authors,
+.subtitle,
+.content {
+  color: var(--text);
+}
+
+.publication-title {
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+.publication-authors {
+  color: var(--muted);
+}
+
+.publication-authors a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.18s ease, text-shadow 0.18s ease;
+}
+
+.publication-authors a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-shadow:
+    0 0 5px rgba(122, 165, 255, 0.18),
+    0 0 12px rgba(122, 165, 255, 0.08);
+}
+
+.publication-links .button.is-disabled-button,
+.publication-links .button.is-disabled-button:hover {
+  cursor: not-allowed;
+  opacity: 0.58;
+  background-color: #444;
+  border-color: #444;
+  color: #fff;
+  transform: none;
+  box-shadow: none;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.coming-soon-label {
+  font-size: 0.88em;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+
+/* Homepage-aligned top navigation. */
+.project-navbar {
+  top: 0;
+  z-index: 100;
+  min-height: 58px;
+  padding: 0;
+  background: var(--topbar);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+.project-navbar-inner {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 0 32px;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-navbar-brand {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.project-navbar-brand:hover {
+  text-decoration: none;
+  background-color: transparent;
+  box-shadow:
+    0 0 8px rgba(221, 132, 82, 0.14),
+    0 0 18px rgba(221, 132, 82, 0.08);
+}
+
+.project-navbar-brand img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  transform: translateY(-2px);
+}
+
+.project-navbar-links {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.project-navbar-links a {
+  color: #444;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.project-navbar-links a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+
+/* Buttons: keep Nerfies rounded buttons, but make hover feel like the homepage. */
+.publication-links .button.is-dark {
+  background-color: #222;
+  border-color: #222;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.publication-links .button.is-dark:hover {
+  background-color: #111;
+  border-color: #111;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 6px rgba(221, 132, 82, 0.25),
+    0 0 14px rgba(221, 132, 82, 0.12);
+  text-decoration: none;
+}
+
+/* Cards and figures. */
+.figure-card img,
+.feature-card,
+.tree-card img,
+.takeaway-box,
+pre {
+  border-color: var(--border) !important;
+}
+
+.figure-card img,
+.feature-card,
+.tree-card img {
+  background: var(--card) !important;
+}
+
+.figure-card figcaption {
+  margin-top: 0.55rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.feature-card {
+  box-shadow: none;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 6px rgba(221, 132, 82, 0.16),
+    0 0 14px rgba(221, 132, 82, 0.08);
+}
+
+.takeaway-box {
+  border-left-color: var(--accent) !important;
+  background: #fffefa !important;
+}
+
+hr {
+  background-color: var(--border);
+}
+
+.tree-card img:hover {
+  box-shadow:
+    0 0 6px rgba(221, 132, 82, 0.25),
+    0 0 18px rgba(221, 132, 82, 0.12) !important;
+}
+
+.tree-caption {
+  color: var(--muted) !important;
+}
+
+/* Five-tree layout: three on the first row, two centered beneath. */
+.tree-gallery.five-trees {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.tree-gallery.five-trees .tree-card {
+  grid-column: span 2;
+}
+
+.tree-gallery.five-trees .tree-card-bottom-left {
+  grid-column: 2 / span 2;
+}
+
+/* Footer: quieter and consistent with the homepage palette. */
+.footer {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.footer a.icon-link {
+  color: var(--text);
+}
+
+.footer a.icon-link:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Mobile behavior. */
+@media screen and (max-width: 900px) {
+  .project-navbar-inner {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .project-navbar-links {
+    gap: 14px;
+  }
+
+  .tree-gallery.five-trees {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tree-gallery.five-trees .tree-card,
+  .tree-gallery.five-trees .tree-card-bottom-left {
+    grid-column: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .project-navbar-links {
+    display: none;
+  }
+
+  .publication-title {
+    font-size: 2.25rem !important;
+  }
+
+  .tree-gallery.five-trees {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Refinements: quieter/minimal project page. */
+.publication-title .title-main {
+  display: inline-block;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.publication-title .title-subtitle {
+  display: inline-block;
+  margin-top: 0.15rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+/* Suppress orange/glowy treatment on interactive elements, except the navbar identity and author links. */
+.publication-links .button.is-dark:hover,
+.feature-card:hover,
+.footer a.icon-link:hover {
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.project-navbar-brand:hover {
+  color: #111;
+  text-decoration: none;
+  text-shadow:
+    0 0 6px rgba(221, 132, 82, 0.35),
+    0 0 14px rgba(221, 132, 82, 0.18);
+}
+
+.publication-links .button.is-dark {
+  box-shadow: none;
+}
+
+.publication-links .button.is-dark:hover {
+  transform: none;
+  background-color: #111;
+  border-color: #111;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Keep cards grounded and minimal. */
+.feature-card,
+.takeaway-box,
+.figure-card img,
+pre {
+  box-shadow: none !important;
+}
+
+.feature-card {
+  transition: none;
+}
+
+.feature-card:hover {
+  transform: none;
+  box-shadow: none !important;
+}
+
+/* Tree gallery is the one place with a subtle hover lift, but no glow. */
+.tree-card img {
+  box-shadow: none !important;
+}
+
+.tree-card img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10) !important;
+}
+
+.tree-caption {
+  margin-top: 0.75rem;
+  line-height: 1.35;
+}
+
+.tree-domain {
+  display: block;
+  color: var(--text);
+  font-weight: 650;
+  font-size: 1.02rem;
+}
+
+.tree-dataset {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media screen and (max-width: 768px) {
+  .publication-title .title-main {
+    font-size: 2.45rem;
+  }
+
+  .publication-title .title-subtitle {
+    font-size: 1.65rem;
+  }
+}
+
+
+/* Final nitpick pass. */
+.publication-title .title-main {
+  font-weight: 650;
+}
+
+.publication-authors a {
+  color: var(--link) !important;
+  text-decoration: none;
+  transition: color 0.18s ease, text-shadow 0.18s ease;
+}
+
+.publication-authors a:hover {
+  color: var(--link-hover) !important;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-shadow:
+    0 0 5px rgba(122, 165, 255, 0.18),
+    0 0 12px rgba(122, 165, 255, 0.08);
+}
+
+
+/* Gallery/readability pass: uniform thumbnails, scrollable expanded trees, and cleaner figure/card backgrounds. */
+
+/* Text/callout surfaces stay pure white. */
+.feature-card,
+.takeaway-box,
+pre {
+  background: #ffffff !important;
+}
+
+/* For split takeaway */
+.takeaway-label {
+  margin-bottom: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.split-takeaway {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.split-takeaway h4 {
+  margin-bottom: 0.35rem;
+  font-size: 1rem;
+  font-weight: 650;
+  color: var(--text);
+}
+
+.split-takeaway p {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .split-takeaway {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* Main paper figures should sit directly on the off-white page background. */
+.figure-card,
+.figure-card img {
+  background: transparent !important;
+}
+
+.figure-card img {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Keep tree thumbnails visually contained and consistent, independent of source-image aspect ratios. */
+.tree-thumb-frame {
+  width: 100%;
+  aspect-ratio: 1.25 / 1;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tree-thumb-frame img,
+.tree-card .tree-thumb-frame img.expandable-tree {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  cursor: zoom-in;
+  transition: transform 0.15s ease;
+}
+
+.tree-card .tree-thumb-frame:hover img.expandable-tree {
+  transform: translateY(-3px);
+  box-shadow: none !important;
+}
+
+.tree-card img:hover {
+  box-shadow: none !important;
+}
+
+.tree-card:hover .tree-thumb-frame {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+}
+
+.tree-full-link {
+  display: inline-block;
+  margin-top: 0.15rem;
+  font-size: 0.84rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.tree-full-link:hover {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Expanded tree view: do not shrink dense diagrams to fit the viewport height. */
+.tree-lightbox {
+  display: none !important;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  padding: 3rem 2rem;
+  background: rgba(0, 0, 0, 0.86);
+  overflow: auto;
+  align-items: initial !important;
+  justify-content: initial !important;
+}
+
+.tree-lightbox.is-active {
+  display: block !important;
+}
+
+.tree-lightbox img {
+  display: block;
+  width: min(2200px, max(95vw, 1700px));
+  max-width: none !important;
+  max-height: none !important;
+  height: auto;
+  margin: 0 auto;
+  object-fit: initial !important;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.tree-lightbox-close {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 10000;
+}
+
+.card-leadin {
+  margin-top: 4rem;
+}
+
+
+@media screen and (max-width: 768px) {
+  .tree-lightbox {
+    padding: 3rem 1rem 1rem;
+  }
+
+  .tree-lightbox img {
+    width: 1400px;
+  }
+  
+  .split-takeaway {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media screen and (max-width: 900px) {
+  .project-navbar-inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .project-navbar-links {
+    gap: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .project-navbar-links {
+    display: none;
+  }
+}
+
+
+/* Responsive figure sizing pass.
+   Keeps figures readable on large monitors while preventing them from dominating laptop screens. */
+.figure-card {
+  display: block;
+  width: 100%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.figure-card.figure-concept {
+  max-width: min(100%, 820px) !important;
+}
+
+.figure-card.figure-result {
+  max-width: min(100%, 860px) !important;
+}
+
+.figure-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .figure-card.figure-concept {
+    max-width: min(100%, 740px) !important;
+  }
+
+  .figure-card.figure-result {
+    max-width: min(100%, 800px) !important;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .figure-card.figure-concept,
+  .figure-card.figure-result {
+    max-width: 100% !important;
+  }
+}
+
+
+/* Eight-tree gallery layout. */
+.tree-gallery.eight-trees {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.15rem;
+  margin-top: 1.5rem;
+}
+
+.tree-gallery.eight-trees .tree-card {
+  grid-column: auto;
+}
+
+.tree-gallery.eight-trees .tree-thumb-frame {
+  aspect-ratio: 1.18 / 1;
+}
+
+.tree-gallery.eight-trees .tree-domain {
+  font-size: 0.98rem;
+}
+
+.tree-gallery.eight-trees .tree-dataset {
+  font-size: 0.86rem;
+}
+
+@media screen and (max-width: 1050px) {
+  .tree-gallery.eight-trees {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .tree-gallery.eight-trees {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* BMC compatibility cards sit closer to the focus/dispersion cards than the main figure lead-ins. */
+.card-leadin.card-leadin-compact {
+  margin-top: 2rem;
+}
+
+.bmc-compatibility-cards {
+  margin-top: 0.25rem;
+}
+
+
+/* Two section backgrounds: keep the darker band for the opening and closing summaries. */
+.main-idea-section,
+.takeaways-section {
+  background: var(--contrast-bg);
+}
+
+.main-idea-section {
+  padding: 2.75rem 1.5rem;
+}
+
+.main-idea-section .title {
+  margin-bottom: 1.5rem;
+}
+
+.main-idea-content {
+  max-width: 960px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  text-align: center !important;
+}
+
+.main-idea-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Keep every resource control on the same row and vertical center. */
+.publication-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+/* Resource buttons share the same dimensions, including the dropdown summary. */
+.publication-links .button {
+  box-sizing: border-box;
+  height: 2.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding-top: calc(0.5rem - 1px);
+  padding-bottom: calc(0.5rem - 1px);
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Announcements joins the resource buttons; its menu remains collapsed by default. */
+.publication-links > .link-block {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+}
+
+.publication-links > .link-block > .button,
+.announcements-dropdown > summary {
+  margin: 0;
+}
+
+.announcements-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+
+.announcements-dropdown > summary {
+  list-style: none;
+  margin: 0;
+  gap: 0;
+}
+
+.announcements-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.announcements-chevron {
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-left: 0.45rem;
+  margin-right: 0;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.announcements-dropdown[open] .announcements-chevron {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.announcements-dropdown:not([open]) .announcements-menu {
+  display: none;
+}
+
+.announcements-menu {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  right: 0;
+  z-index: 110;
+  width: 250px;
+  max-width: calc(100vw - 3rem);
+  padding: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+}
+
+.announcements-menu .announcement-link {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.announcement-link:hover {
+  background: var(--bg);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.announcement-link:not([href]),
+.announcement-link[aria-disabled="true"] {
+  color: var(--muted);
+  cursor: default;
+}
+
+.announcement-platform {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.announcement-logo {
+  display: block;
+  width: 20px;
+  height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+  flex-shrink: 0;
+}
+
+.announcement-status {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.announcements-dropdown > summary:focus-visible,
+.announcement-link:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+}
+
+@media screen and (max-width: 768px) {
+  .announcements-menu {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .main-idea-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .main-idea-content {
+    font-size: 1rem;
+    text-align: left !important;
+  }
+}
+
+
+/* Dataset names in the tree gallery can link to their source datasets. */
+a.tree-dataset {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+a.tree-dataset:hover {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tree-gallery.eight-trees a.tree-dataset {
+  font-size: 0.86rem;
+}
+
+</style>
 <!-- Small page-specific additions. Move these into static/css/index.css later if preferred. -->
 <style>
     .figure-card {
@@ -188,6 +1092,41 @@
 <span>Code</span>
 </a>
 </span>
+<div class="link-block">
+<details class="announcements-dropdown" id="announcements">
+<summary class="button is-normal is-rounded is-dark">
+<span class="icon"><i aria-hidden="true" class="fas fa-bullhorn"></i></span>
+<span>Announcements</span>
+<span aria-hidden="true" class="announcements-chevron"></span>
+</summary>
+<div class="announcements-menu">
+<!-- NOTE: add each announcement URL as an href attribute on its <a> element.
+     Links without an href stay disabled until a URL is supplied. -->
+<a class="announcement-link" data-announcement-link target="_blank" rel="noopener noreferrer" href="https://x.com/darrienmckenzie/status/2072760475134439460">
+<span class="announcement-platform"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="announcement-logo" width="20" height="20" aria-hidden="true" focusable="false" fill="#000000"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg><span>X / Twitter</span></span>
+<span class="announcement-status">Coming soon</span>
+</a>
+<a class="announcement-link" data-announcement-link target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/feed/update/urn:li:activity:7483622645385617408/">
+<span class="announcement-platform"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="announcement-logo" width="20" height="20" aria-hidden="true" focusable="false" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></span>
+<span class="announcement-status">Coming soon</span>
+</a>
+<a class="announcement-link" data-announcement-link target="_blank" rel="noopener noreferrer" href="https://huggingface.co/papers/2606.19750">
+<span class="announcement-platform"><svg xmlns="http://www.w3.org/2000/svg" fill="none" class="announcement-logo" width="20" height="20" aria-hidden="true" focusable="false" viewBox="0 0 95 88">
+	<path fill="#FFD21E" d="M47.21 76.5a34.75 34.75 0 1 0 0-69.5 34.75 34.75 0 0 0 0 69.5Z"/>
+	<path fill="#FF9D0B" d="M81.96 41.75a34.75 34.75 0 1 0-69.5 0 34.75 34.75 0 0 0 69.5 0Zm-73.5 0a38.75 38.75 0 1 1 77.5 0 38.75 38.75 0 0 1-77.5 0Z"/>
+	<path fill="#3A3B45" d="M58.5 32.3c1.28.44 1.78 3.06 3.07 2.38a5 5 0 1 0-6.76-2.07c.61 1.15 2.55-.72 3.7-.32ZM34.95 32.3c-1.28.44-1.79 3.06-3.07 2.38a5 5 0 1 1 6.76-2.07c-.61 1.15-2.56-.72-3.7-.32Z"/>
+	<path fill="#FF323D" d="M46.96 56.29c9.83 0 13-8.76 13-13.26 0-2.34-1.57-1.6-4.09-.36-2.33 1.15-5.46 2.74-8.9 2.74-7.19 0-13-6.88-13-2.38s3.16 13.26 13 13.26Z"/>
+	<path fill="#3A3B45" fill-rule="evenodd" d="M39.43 54a8.7 8.7 0 0 1 5.3-4.49c.4-.12.81.57 1.24 1.28.4.68.82 1.37 1.24 1.37.45 0 .9-.68 1.33-1.35.45-.7.89-1.38 1.32-1.25a8.61 8.61 0 0 1 5 4.17c3.73-2.94 5.1-7.74 5.1-10.7 0-2.34-1.57-1.6-4.09-.36l-.14.07c-2.31 1.15-5.39 2.67-8.77 2.67s-6.45-1.52-8.77-2.67c-2.6-1.29-4.23-2.1-4.23.29 0 3.05 1.46 8.06 5.47 10.97Z" clip-rule="evenodd"/>
+	<path fill="#FF9D0B" d="M70.71 37a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5ZM24.21 37a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5ZM17.52 48c-1.62 0-3.06.66-4.07 1.87a5.97 5.97 0 0 0-1.33 3.76 7.1 7.1 0 0 0-1.94-.3c-1.55 0-2.95.59-3.94 1.66a5.8 5.8 0 0 0-.8 7 5.3 5.3 0 0 0-1.79 2.82c-.24.9-.48 2.8.8 4.74a5.22 5.22 0 0 0-.37 5.02c1.02 2.32 3.57 4.14 8.52 6.1 3.07 1.22 5.89 2 5.91 2.01a44.33 44.33 0 0 0 10.93 1.6c5.86 0 10.05-1.8 12.46-5.34 3.88-5.69 3.33-10.9-1.7-15.92-2.77-2.78-4.62-6.87-5-7.77-.78-2.66-2.84-5.62-6.25-5.62a5.7 5.7 0 0 0-4.6 2.46c-1-1.26-1.98-2.25-2.86-2.82A7.4 7.4 0 0 0 17.52 48Zm0 4c.51 0 1.14.22 1.82.65 2.14 1.36 6.25 8.43 7.76 11.18.5.92 1.37 1.31 2.14 1.31 1.55 0 2.75-1.53.15-3.48-3.92-2.93-2.55-7.72-.68-8.01.08-.02.17-.02.24-.02 1.7 0 2.45 2.93 2.45 2.93s2.2 5.52 5.98 9.3c3.77 3.77 3.97 6.8 1.22 10.83-1.88 2.75-5.47 3.58-9.16 3.58-3.81 0-7.73-.9-9.92-1.46-.11-.03-13.45-3.8-11.76-7 .28-.54.75-.76 1.34-.76 2.38 0 6.7 3.54 8.57 3.54.41 0 .7-.17.83-.6.79-2.85-12.06-4.05-10.98-8.17.2-.73.71-1.02 1.44-1.02 3.14 0 10.2 5.53 11.68 5.53.11 0 .2-.03.24-.1.74-1.2.33-2.04-4.9-5.2-5.21-3.16-8.88-5.06-6.8-7.33.24-.26.58-.38 1-.38 3.17 0 10.66 6.82 10.66 6.82s2.02 2.1 3.25 2.1c.28 0 .52-.1.68-.38.86-1.46-8.06-8.22-8.56-11.01-.34-1.9.24-2.85 1.31-2.85Z"/>
+	<path fill="#FFD21E" d="M38.6 76.69c2.75-4.04 2.55-7.07-1.22-10.84-3.78-3.77-5.98-9.3-5.98-9.3s-.82-3.2-2.69-2.9c-1.87.3-3.24 5.08.68 8.01 3.91 2.93-.78 4.92-2.29 2.17-1.5-2.75-5.62-9.82-7.76-11.18-2.13-1.35-3.63-.6-3.13 2.2.5 2.79 9.43 9.55 8.56 11-.87 1.47-3.93-1.71-3.93-1.71s-9.57-8.71-11.66-6.44c-2.08 2.27 1.59 4.17 6.8 7.33 5.23 3.16 5.64 4 4.9 5.2-.75 1.2-12.28-8.53-13.36-4.4-1.08 4.11 11.77 5.3 10.98 8.15-.8 2.85-9.06-5.38-10.74-2.18-1.7 3.21 11.65 6.98 11.76 7.01 4.3 1.12 15.25 3.49 19.08-2.12Z"/>
+	<path fill="#FF9D0B" d="M77.4 48c1.62 0 3.07.66 4.07 1.87a5.97 5.97 0 0 1 1.33 3.76 7.1 7.1 0 0 1 1.95-.3c1.55 0 2.95.59 3.94 1.66a5.8 5.8 0 0 1 .8 7 5.3 5.3 0 0 1 1.78 2.82c.24.9.48 2.8-.8 4.74a5.22 5.22 0 0 1 .37 5.02c-1.02 2.32-3.57 4.14-8.51 6.1-3.08 1.22-5.9 2-5.92 2.01a44.33 44.33 0 0 1-10.93 1.6c-5.86 0-10.05-1.8-12.46-5.34-3.88-5.69-3.33-10.9 1.7-15.92 2.78-2.78 4.63-6.87 5.01-7.77.78-2.66 2.83-5.62 6.24-5.62a5.7 5.7 0 0 1 4.6 2.46c1-1.26 1.98-2.25 2.87-2.82A7.4 7.4 0 0 1 77.4 48Zm0 4c-.51 0-1.13.22-1.82.65-2.13 1.36-6.25 8.43-7.76 11.18a2.43 2.43 0 0 1-2.14 1.31c-1.54 0-2.75-1.53-.14-3.48 3.91-2.93 2.54-7.72.67-8.01a1.54 1.54 0 0 0-.24-.02c-1.7 0-2.45 2.93-2.45 2.93s-2.2 5.52-5.97 9.3c-3.78 3.77-3.98 6.8-1.22 10.83 1.87 2.75 5.47 3.58 9.15 3.58 3.82 0 7.73-.9 9.93-1.46.1-.03 13.45-3.8 11.76-7-.29-.54-.75-.76-1.34-.76-2.38 0-6.71 3.54-8.57 3.54-.42 0-.71-.17-.83-.6-.8-2.85 12.05-4.05 10.97-8.17-.19-.73-.7-1.02-1.44-1.02-3.14 0-10.2 5.53-11.68 5.53-.1 0-.19-.03-.23-.1-.74-1.2-.34-2.04 4.88-5.2 5.23-3.16 8.9-5.06 6.8-7.33-.23-.26-.57-.38-.98-.38-3.18 0-10.67 6.82-10.67 6.82s-2.02 2.1-3.24 2.1a.74.74 0 0 1-.68-.38c-.87-1.46 8.05-8.22 8.55-11.01.34-1.9-.24-2.85-1.31-2.85Z"/>
+	<path fill="#FFD21E" d="M56.33 76.69c-2.75-4.04-2.56-7.07 1.22-10.84 3.77-3.77 5.97-9.3 5.97-9.3s.82-3.2 2.7-2.9c1.86.3 3.23 5.08-.68 8.01-3.92 2.93.78 4.92 2.28 2.17 1.51-2.75 5.63-9.82 7.76-11.18 2.13-1.35 3.64-.6 3.13 2.2-.5 2.79-9.42 9.55-8.55 11 .86 1.47 3.92-1.71 3.92-1.71s9.58-8.71 11.66-6.44c2.08 2.27-1.58 4.17-6.8 7.33-5.23 3.16-5.63 4-4.9 5.2.75 1.2 12.28-8.53 13.36-4.4 1.08 4.11-11.76 5.3-10.97 8.15.8 2.85 9.05-5.38 10.74-2.18 1.69 3.21-11.65 6.98-11.76 7.01-4.31 1.12-15.26 3.49-19.08-2.12Z"/>
+</svg><span>HuggingFace</span></span>
+<span class="announcement-status">Coming soon</span>
+</a>
+</div>
+</details>
+</div>
 <span class="link-block">
 <a class="external-link button is-normal is-rounded is-dark" href="https://github.com/DarrienMcKenzie/manifold-bandits/releases/tag/v0.1" target="_blank">
 <span class="icon"><i class="fas fa-sitemap"></i></span>
@@ -202,11 +1141,32 @@
   <span class="icon"><i class="fas fa-chart-line"></i></span>
   <span>Training Logs</span>
 </a>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="main-idea-title" class="section main-idea-section" id="main-idea">
+<div class="container is-max-desktop">
+<h2 class="title is-3 has-text-centered" id="main-idea-title">Main Idea (TL;DR)</h2>
+<div class="content has-text-justified main-idea-content">
+<p>
+  Adaptive curriculum learning decides which problems an LLM should train on, and when.
+  Most approaches make this decision primarily by prioritizing problems at the
+  "right" level of difficulty: not too hard, not too easy.
+</p>
+<p>
+  <b>But difficulty is not the only thing that matters. Problem <i>type</i> matters, too.</b>
+</p>
+<p> Thus, we instead frame adaptive curriculum learning as allocating training effort across diverse and 
+interacting problem types. The relationships between problems are approximated by the <i>latent
+geometry</i> of the policy, or: how the LLM being trained represents problems internally. Our algorithm, BMC, uses this 
+geometry to orchestrate training. 
+</p>
 
-</div>
-</div>
-</div>
-</div>
 </div>
 </div>
 </section>
@@ -248,29 +1208,6 @@
 	These results show that prioritizing difficulty alone is insufficient to ensure strong downstream performance
 	and highlight the importance of incorporating structure and type-awareness in problem sampling.
 </p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<section class="section main-idea-section" id="main-idea">
-<div class="container is-max-desktop">
-<div class="columns is-centered">
-<div class="column is-full-width">
-<div class="main-idea-box content">
-<p class="main-idea-label">Main idea</p>
-<p>
-  Curriculum learning decides which problems an LLM should train on, and when.
-  Most approaches make this decision primarily by searching for problems at the
-  “right” level of difficulty.
-</p>
-<p> We instead treat curriculum learning as allocating training effort across diverse and 
-interacting problem types. The relationships between problems are approximated by the latent
-geometry of the policy, or: how the LLM being trained represents problems internally. BMC uses this 
-geometry to orchestrate training. 
-</p>
-
 </div>
 </div>
 </div>
@@ -361,7 +1298,7 @@ geometry to orchestrate training.
 </div>
 </div>
 </section>
-<section class="section hero is-light" id="bmc">
+<section class="section" id="bmc">
 <div class="container is-max-desktop">
 <div class="columns is-centered">
 <div class="column is-full-width">
@@ -666,7 +1603,7 @@ geometry to orchestrate training.
 </div>
 </div>
 </div></div></div></section>
-<section class="section hero is-light" id="takeaways">
+<section class="section takeaways-section" id="takeaways">
 <div class="container is-max-desktop">
 <div class="columns is-centered">
 <div class="column is-full-width">
@@ -780,6 +1717,36 @@ What looks like one dataset or domain can contain many distinct task distributio
 </footer>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    const announcements = document.getElementById("announcements");
+    const announcementToggle = announcements.querySelector("summary");
+
+    announcements.querySelectorAll("[data-announcement-link]").forEach((link) => {
+      const url = (link.getAttribute("href") || "").trim();
+      if (!url || url === "#") {
+        link.setAttribute("role", "link");
+        link.setAttribute("aria-disabled", "true");
+        link.setAttribute("tabindex", "-1");
+        link.addEventListener("click", (event) => event.preventDefault());
+      } else {
+        link.querySelector(".announcement-status")?.remove();
+        link.addEventListener("click", () => {
+          announcements.open = false;
+          announcementToggle.focus();
+        });
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!announcements.contains(event.target)) announcements.open = false;
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && announcements.open) {
+        announcements.open = false;
+        announcementToggle.focus();
+      }
+    });
+
     const lightbox = document.getElementById("tree-lightbox");
     const lightboxImg = document.getElementById("tree-lightbox-img");
     const closeButton = document.getElementById("tree-lightbox-close");
